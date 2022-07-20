@@ -44,19 +44,19 @@
     let ctx = canvas.getContext("2d")
 
     canvas.width = document.documentElement.clientWidth - 2
-    canvas.height = document.documentElement.clientHeight - 48
+    canvas.height = document.documentElement.clientHeight - 41
 
     let flag = false
     let lastPoint = []
     if(isTouchDevice === true){
         canvas.ontouchstart = e => {
             flag = true
-            lastPoint = [e.touches[0].clientX, e.touches[0].clientY]
+            lastPoint = [e.touches[0].clientX - 2, e.touches[0].clientY - 41]
         }
         canvas.ontouchmove = e => {
             if(flag === true){
-                drawBlackLine(lastPoint[0], lastPoint[1], e.touches[0].clientX, e.touches[0].clientY)
-                lastPoint = [e.touches[0].clientX, e.touches[0].clientY]
+                drawBlackLine(lastPoint[0], lastPoint[1], e.touches[0].clientX - 2, e.touches[0].clientY - 41)
+                lastPoint = [e.touches[0].clientX - 2, e.touches[0].clientY - 41]
             }
         }
         canvas.ontouchend = () => {
@@ -65,12 +65,13 @@
     } else {
         canvas.onmousedown = e => {
             flag = true
-            lastPoint = [e.clientX, e.clientY]
+            lastPoint = [e.clientX - 2, e.clientY - 41]
+            console.log(lastPoint);
         }   
         canvas.onmousemove = e => {
             if(flag === true){
-                drawBlackLine(lastPoint[0], lastPoint[1], e.clientX, e.clientY)
-                lastPoint = [e.clientX, e.clientY]
+                drawBlackLine(lastPoint[0], lastPoint[1], e.clientX - 2, e.clientY - 41)
+                lastPoint = [e.clientX - 2, e.clientY - 41]
             }
         }
         canvas.onmouseup = () => {
